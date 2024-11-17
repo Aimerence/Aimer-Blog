@@ -1,11 +1,26 @@
 import type { Site, SocialObjects } from "./types";
+// other imports
+import type { GiscusProps } from "@giscus/react";
+
+export const GISCUS: GiscusProps = {
+  repo: "Aimerence/Aimer-Blog",
+  repoId: "R_kgDONOoj-A",
+  category: "Blog Post Comments",
+  categoryId: "DIC_kwDONOoj-M4CkQNG",
+  mapping: "pathname",
+  reactionsEnabled: "0",
+  emitMetadata: "0",
+  inputPosition: "top",
+  lang: "en",
+  loading: "lazy",
+};
 
 export const SITE: Site = {
-  website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
-  author: "Sat Naing",
+  website: "https://xxxx/", // replace this with your deployed domain
+  author: "Aimer",
   profile: "https://satnaing.dev/",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
-  title: "AstroPaper",
+  desc: "A simple blog .",
+  title: "Aimer",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
@@ -34,7 +49,7 @@ export const LOGO_IMAGE = {
 export const SOCIALS: SocialObjects = [
   {
     name: "Github",
-    href: "https://github.com/satnaing/astro-paper",
+    href: "https://github.com/Aimerence",
     linkTitle: ` ${SITE.title} on Github`,
     active: true,
   },
@@ -42,25 +57,25 @@ export const SOCIALS: SocialObjects = [
     name: "Facebook",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on Facebook`,
-    active: true,
+    active: false,
   },
   {
     name: "Instagram",
-    href: "https://github.com/satnaing/astro-paper",
+    href: "https://www.instagram.com/aimer1942/",
     linkTitle: `${SITE.title} on Instagram`,
-    active: true,
+    active: false,
   },
   {
     name: "LinkedIn",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on LinkedIn`,
-    active: true,
+    active: false,
   },
   {
     name: "Mail",
-    href: "mailto:yourmail@gmail.com",
+    href: "mailto:liusijia11942@gmail.com",
     linkTitle: `Send an email to ${SITE.title}`,
-    active: false,
+    active: true,
   },
   {
     name: "X",
