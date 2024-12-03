@@ -21,3 +21,5 @@ description:  更新本主题的教程
 ```node
 npm install -g npm-check-updates
 ```
+
+测速
