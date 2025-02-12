@@ -16,9 +16,9 @@ export const GISCUS: GiscusProps = {
 };
 
 export const SITE: Site = {
-  website: "https://xxxx/", // replace this with your deployed domain
+  website: "https://www.521942.xyz/", // replace this with your deployed domain
   author: "Aimer",
-  profile: "https://satnaing.dev/",
+  profile: "https://github.com/Aimerence",
   desc: "A simple blog .",
   title: "Aimer",
   ogImage: "astropaper-og.jpg",
@@ -28,7 +28,7 @@ export const SITE: Site = {
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
   showArchives: true,
   editPost: {
-    url: "https://github.com/satnaing/astro-paper/edit/main/src/content/blog",
+    url: "https://github.com/Aimerence/aimer-blog/edit/master/src/content/blog",
     text: "Suggest Changes",
     appendFilePath: true,
   },
