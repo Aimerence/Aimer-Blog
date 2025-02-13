@@ -4,31 +4,17 @@
     "prefix": "frontmatter",
     "body": [
       "---",
-      "author: $1",
+      "author: Aimer",
       "pubDatetime: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND.000$CURRENT_TIMEZONE_OFFSET",
-      "modDatetime: $3",
-      "title: $4",
-      "featured: ${5|false,true|}",
-      "draft: ${6|true,false|}",
+      "modDatetime: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND.000$CURRENT_TIMEZONE_OFFSET",
+      "title: ${TM_FILENAME_BASE}",
+      "featured: ${1|true,false|}",
+      "draft: ${2|false,true|}",
       "tags:",
-      "  - $7",
-      "description: $8",
-      "---",
+      "  - $3",
+      "description: $4",
+      "---"
     ],
-    "description": "Adds the frontmatter block for the AstroPaper Blog post"
-  },
-  "Blog Template": {
-    "scope": "markdown",
-    "prefix": "template",
-    "body": [
-      "${1:frontmatter}",
-      "",
-      "${2: Introductory Sentence}",
-      "",
-      "## Table of contents",
-      "",
-      "## ${3: heading 1}",
-    ],
-    "description": "Adds the template for the AstroPaper Blog post. You will need to trigger the snippet modal on the 'frontmatter' line to insert the other snipper."
+    "description": "添加 AstroPaper 博客文章的前置元数据块"
   }
 }
