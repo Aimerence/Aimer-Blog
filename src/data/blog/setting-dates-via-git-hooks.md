@@ -1,4 +1,5 @@
 ---
+pubDatetime: 2025-03-23T00:24:42+08:00
 author: Simon Smale
 pubDatetime: 2024-01-03T20:40:08Z
 modDatetime: 2024-01-08T18:59:05Z
@@ -11,6 +12,7 @@ tags:
 canonicalURL: https://smale.codes/posts/setting-dates-via-git-hooks/
 description: 如何使用 Git Hooks 在 AstroPaper 中设置创建和修改日期
 ---
+pubDatetime: 2025-03-23T00:24:42+08:00
 
 在这篇文章中，我将解释如何使用 pre-commit Git hook 来自动设置 AstroPaper 博客主题前置元数据中的创建日期（`pubDatetime`）和修改日期（`modDatetime`）。
 
@@ -35,12 +37,14 @@ description: 如何使用 Git Hooks 在 AstroPaper 中设置创建和修改日�
 ### 当文件被编辑时更新修改日期
 
 ---
+pubDatetime: 2025-03-23T00:24:42+08:00
 
 更新：
 
 这部分已经更新为一个更智能的钩子版本。现在它在文章发布之前不会增加 `modDatetime`。在第一次发布时，将草稿状态设置为 `first`，然后观察魔法发生。
 
 ---
+pubDatetime: 2025-03-23T00:24:42+08:00
 
 ```shell
 # 修改的文件，更新 modDatetime
@@ -76,12 +80,14 @@ A       src/content/blog/setting-dates-via-git-hooks.md
 我们将该输出通过管道传递到 grep 命令，在那里我们查找每一行以找到已被修改的文件。该行需要以 `M` 开头（`^(M)`），后面可以有任意数量的字符（`.*`），并以 `.md` 文件扩展名结尾（`.(md)$`）。这将过滤掉不是修改过的 markdown 文件的行 `egrep -i "^(M).*\.(md)$"`。
 
 ---
+pubDatetime: 2025-03-23T00:24:42+08:00
 
 #### 改进 - 更明确
 
 可以添加只查找 `blog` 目录中的 markdown 文件，因为这些是唯一具有正确前置元数据的文件。
 
 ---
+pubDatetime: 2025-03-23T00:24:42+08:00
 
 正则表达式将捕获两个部分，字母和文件路径。我们将把这个列表通过管道传递到 while 循环中，以遍历匹配的行，并将字母分配给 `a`，将路径分配给 `b`。我们暂时忽略 `a`。
 
@@ -100,12 +106,14 @@ A       src/content/blog/setting-dates-via-git-hooks.md
 这个替换是在整个文件的上下文中进行的，所以我们把它放到一个临时文件中（`> tmp`），然后我们将（`mv`）新文件移动到旧文件的位置，覆盖它。然后将其添加到 git 中，准备提交，就好像我们自己做了更改一样。
 
 ---
+pubDatetime: 2025-03-23T00:24:42+08:00
 
 #### 注意
 
 为了让 `sed` 工作，前置元数据中需要已经有 `modDatetime` 键。要让应用程序使用空日期构建，你需要进行一些其他更改，请参见[下文](#empty-moddatetime-changes)。
 
 ---
+pubDatetime: 2025-03-23T00:24:42+08:00
 
 ### 为新文件添加日期
 
@@ -121,12 +129,14 @@ done
 ```
 
 ---
+pubDatetime: 2025-03-23T00:24:42+08:00
 
 #### 改进 - 只循环一次
 
 我们可以在循环中使用 `a` 变量来切换，在一个循环中更新 `modDatetime` 或添加 `pubDatetime`。
 
 ---
+pubDatetime: 2025-03-23T00:24:42+08:00
 
 ## 填充前置元数据
 
