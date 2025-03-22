@@ -1,9 +1,8 @@
 ---
-pubDatetime: 2025-03-23T00:24:42+08:00
-author: Simon Smale
-pubDatetime: 2024-01-03T20:40:08Z
-modDatetime: 2024-01-08T18:59:05Z
 title: 如何使用 Git Hooks 设置创建和修改日期
+author: Simon Smale
+pubDatetime: 2025-03-23T00:24:42+08:00
+modDatetime: 2025-03-23T00:27:28+08:00
 featured: false
 draft: false
 tags:
@@ -12,7 +11,6 @@ tags:
 canonicalURL: https://smale.codes/posts/setting-dates-via-git-hooks/
 description: 如何使用 Git Hooks 在 AstroPaper 中设置创建和修改日期
 ---
-pubDatetime: 2025-03-23T00:24:42+08:00
 
 在这篇文章中，我将解释如何使用 pre-commit Git hook 来自动设置 AstroPaper 博客主题前置元数据中的创建日期（`pubDatetime`）和修改日期（`modDatetime`）。
 
