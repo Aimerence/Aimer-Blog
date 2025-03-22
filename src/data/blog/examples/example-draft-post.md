@@ -1,5 +1,5 @@
 ---
-title: Example Draft Post
+title: 示例草稿文章
 author: Sat Naing
 pubDatetime: 2022-06-06T04:06:31Z
 slug: example-draft-post
@@ -9,13 +9,11 @@ tags:
   - TypeScript
   - Astro
 description:
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-  incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel
-  fringilla est
+  这是一段示例描述文本，用于展示草稿文章的功能。这篇文章不会显示在公开页面上，因为它被标记为草稿状态。
 ---
 
-Users cannot see this post because it is in draft.
+用户无法看到这篇文章，因为它处于草稿状态。
 
-## Motivation
+## 动机
 
-rec 1
+记录 1

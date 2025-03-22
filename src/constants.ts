@@ -16,7 +16,7 @@ export const LOCALE = {
 export const SOCIALS = [
   {
     name: "Github",
-    href: "https://github.com/satnaing/astro-paper",
+    href: "https://github.com/Aimerence/Aimer-Blog",
     linkTitle: ` ${SITE.title} on Github`,
     icon: IconGitHub,
   },
@@ -34,7 +34,7 @@ export const SOCIALS = [
   },
   {
     name: "Mail",
-    href: "mailto:yourmail@gmail.com",
+    href: "mailto:liusijia1942@gmail.com",
     linkTitle: `Send an email to ${SITE.title}`,
     icon: IconMail,
   },

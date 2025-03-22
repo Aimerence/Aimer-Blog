@@ -3,34 +3,25 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-AstroPaper is a minimal, responsive and SEO-friendly Astro blog theme. I designed and crafted this based on [my personal blog](https://satnaing.dev/blog).
+## 关于域名
 
-This theme is aimed to be accessible out of the box. Light and dark mode are supported by
-default and additional color schemes can also be configured.
+1. 六位数字xyz域名十年只要48软妹币。
+2. 域名由52+1942组成，1942因为《1984》和《1Q84》两本书特别喜爱的缘故，两个极端的世界，故取半致敬。注册完域名发现谐音“我爱你就是啊”，蛮中意捏！
 
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
+## 关于架构
 
-<div>
-  <img src="/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
-</div>
+1. 本站用的astro框架加astro-paper主题。
+2. 本站托管在免费的Vercle上，解析在Cloudflare。
+3. 关于网站一些建设（ctrl c\crtl v大法）
 
-## Tech Stack
+## 关于内容
 
-This theme is written in vanilla JavaScript (+ TypeScript for type checking) and a little bit of ReactJS for some interactions. TailwindCSS is used for styling; and Markdown is used for blog contents.
+1. 写些学习笔记，证明自己学过。
+2. 发些无病呻吟，假装文学少年。
+3. 发些我认为值得分享的东西。
 
-## Features
+## 关于本人
 
-Here are certain features of this site.
-
-- fully responsive and accessible
-- SEO-friendly
-- light & dark mode
-- fuzzy search
-- super fast performance
-- draft posts
-- pagination
-- sitemap & rss feed
-- highly customizable
-
-If you like this theme, you can star/contribute to the [repo](https://github.com/satnaing/astro-paper).  
-Or you can even give any feedback via my [email](mailto:contact@satnaing.dev).
+1. 稀有的小绿老头（INFJ），其实不稀有，实际亚洲挺多。
+2. 有做事目的但执行力低，建博客也是为了提高执行力。
+3. 多愁善感、外热内冷，当然可能是表面。
