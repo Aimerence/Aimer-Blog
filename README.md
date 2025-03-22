@@ -173,7 +173,3 @@ PUBLIC_GOOGLE_SITE_VERIFICATION=你的-google-站点验证-值
 ---
 
 由 [Sat Naing](https://satnaing.dev) 👨🏻‍💻 和[贡献者们](https://github.com/satnaing/astro-paper/graphs/contributors)用 🤍 制作。
-
-# Aimer Blog
-
-Test deploy on main branch.
