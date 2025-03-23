@@ -44,10 +44,11 @@ description: 使用原生 JavaScript 方式在 Astro 博客中集成 Giscus 评�
 <section class="mx-auto mt-12">
   <div id="giscus-container">
     <script
+      is:inline
       src="https://giscus.app/client.js"
       data-repo="你的用户名/仓库名"
       data-repo-id="你的仓库ID"
-      data-category="你的分类名称"
+      data-category="Blog Post Comments"
       data-category-id="你的分类ID"
       data-mapping="pathname"
       data-strict="0"
@@ -179,4 +180,21 @@ import Comments from "@/components/Comments.astro";
 
 - [Giscus 官方文档](https://giscus.app)
 - [Astro 文档](https://docs.astro.build)
-- [MutationObserver MDN 文档](https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver) 
+- [MutationObserver MDN 文档](https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver)
+
+## 注意事项
+
+1. **script 标签的 `is:inline` 指令**
+   - 当 script 标签带有属性（如 `src`）时，Astro 会自动将其视为内联脚本
+   - 建议显式添加 `is:inline` 指令，这样可以：
+     - 避免构建时的警告提示
+     - 明确表示这是一个不需要处理的外部脚本
+     - 符合 Astro 的最佳实践
+   - 这不影响功能，只是代码风格的改进
+
+2. **配置参数说明**
+   - `data-repo` 和 `data-repo-id`：你的 GitHub 仓库信息
+   - `data-category` 和 `data-category-id`：Giscus 讨论分类
+   - `data-mapping`：使用 pathname 进行页面映射
+   - `data-theme`：评论区主题样式
+   - `data-lang`：界面语言设置 
