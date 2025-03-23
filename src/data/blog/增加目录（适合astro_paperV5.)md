@@ -76,7 +76,7 @@ const { headings } = Astro.props;
 const toc = generateToc(headings);
 ---
 
-<aside class="lg:block fixed left-[82%] top-32 order-2 -me-32 hidden basis-64">
+<aside class="lg:block sticky top-20 order-2 -me-32 hidden basis-64 max-h-[calc(100vh-9rem)] overflow-auto">
   <h2 class="font-semibold">Table of Contents</h2>
   <ul class="mt-4 text-sm">
     {toc.map(heading => <TOCHeading heading={heading} />)}
@@ -152,11 +152,11 @@ const { Content, headings } = await render(post);
 
 3. 添加目录组件：
 ```astro
-<div class="mx-auto flex w-full max-w-[1960px] justify-center gap-8 px-4">
+<div class="mx-auto flex w-full max-w-[1600px] justify-between gap-8 px-4">
   <main>
     <!-- 原有内容 -->
   </main>
-  <TOC headings={headings} />
+  {!!headings.length && <TOC headings={headings} />}
 </div>
 ```
 

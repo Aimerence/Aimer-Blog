@@ -11,8 +11,8 @@ const { headings } = Astro.props;
 const toc = generateToc(headings);
 ---
 
-<aside class="lg:block fixed left-[82%] top-32 order-2 -me-32 hidden basis-64">
-  <h2 class="font-semibold">Table of Contents</h2>
+<aside class="hidden lg:block sticky top-20 w-64 ml-8 max-h-[calc(100vh-9rem)] overflow-auto">
+  <h2 class="font-semibold">目录</h2>
   <ul class="mt-4 text-sm">
     {toc.map(heading => <TOCHeading heading={heading} />)}
   </ul>
@@ -32,3 +32,19 @@ const toc = generateToc(headings);
     });
   });
 </script>
+
+<style>
+  aside {
+    scrollbar-width: thin;
+  }
+  aside::-webkit-scrollbar {
+    width: 3px;
+  }
+  aside::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  aside::-webkit-scrollbar-thumb {
+    background-color: var(--color-text-muted);
+    border-radius: 1.5px;
+  }
+</style>

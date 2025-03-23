@@ -85,7 +85,7 @@ const nextPost =
 <Layout {...layoutProps}>
   <Header />
   <BackButton />
-  <div class="mx-auto flex w-full max-w-[1960px] justify-center gap-8 px-4">
+  <div class="mx-auto flex w-full max-w-[1600px] justify-between gap-8 px-4">
     <main
       id="main-content"
       class:list={[
@@ -166,7 +166,7 @@ const nextPost =
         }
       </div>
     </main>
-    <TOC headings={headings} />
+    {!!headings.length && <TOC headings={headings} />}
   </div>
   <Footer />
 </Layout>
