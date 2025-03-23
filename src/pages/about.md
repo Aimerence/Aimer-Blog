@@ -11,7 +11,7 @@ title: "About"
 ## 关于架构
 
 1. 本站用的astro框架加astro-paper主题。
-2. 本站托管在免费的Vercle上，解析在Cloudflare。
+2. 本站托管在免费的Vercel上，解析在Cloudflare。
 3. 关于网站一些建设（ctrl c\crtl v大法）
 
 ## 关于内容
