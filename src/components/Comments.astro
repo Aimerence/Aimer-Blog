@@ -1,0 +1,74 @@
+---
+---
+
+<section class="mx-auto mt-12">
+  <div id="giscus-container">
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="Aimerence/Aimer-Blog"
+      data-repo-id="R_kgDONOoj-A"
+      data-category="Blog Post Comments"
+      data-category-id="DIC_kwDONOoj-M4CkQNG"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="noborder_light"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async
+    ></script>
+  </div>
+</section>
+
+<script is:inline>
+  function updateGiscusTheme() {
+    const theme = document.documentElement.getAttribute("data-theme") === "dark"
+      ? "dark_dimmed"
+      : "light";
+    
+    const iframe = document.querySelector("iframe.giscus-frame");
+    if (iframe) {
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme } } },
+        "https://giscus.app"
+      );
+    } else {
+      const giscusContainer = document.getElementById("giscus-container");
+      if (giscusContainer) {
+        const giscusScript = giscusContainer.querySelector("script");
+        if (giscusScript) {
+          giscusScript.setAttribute(
+            "data-theme",
+            theme === "dark" ? "noborder_dark" : "noborder_light"
+          );
+        }
+      }
+    }
+  }
+
+  // 初始化时更新主题
+  updateGiscusTheme();
+
+  // 监听主题变化
+  const observer = new MutationObserver(updateGiscusTheme);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
+  // 页面加载完成时更新主题
+  window.addEventListener("load", updateGiscusTheme);
+
+  // 监听 iframe 加载
+  const bodyObserver = new MutationObserver(() => {
+    if (document.querySelector("iframe.giscus-frame")) {
+      updateGiscusTheme();
+    }
+  });
+  bodyObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+</script> 
