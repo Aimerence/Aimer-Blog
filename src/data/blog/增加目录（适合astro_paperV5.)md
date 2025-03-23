@@ -82,6 +82,21 @@ const toc = generateToc(headings);
     {toc.map(heading => <TOCHeading heading={heading} />)}
   </ul>
 </aside>
+
+<script is:inline>
+  // 平滑滚动
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href")?.slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+        history.pushState(null, "", `#${targetId}`);
+      }
+    });
+  });
+</script>
 ```
 
 ### 3. 创建目录项组件
