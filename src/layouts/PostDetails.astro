@@ -14,6 +14,7 @@ import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
 import { SITE } from "@/config";
+import TOC from "@/components/Toc.astro";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -35,7 +36,7 @@ const {
   hideEditPost,
 } = post.data;
 
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 
 let ogImageUrl: string | undefined;
 
@@ -84,86 +85,89 @@ const nextPost =
 <Layout {...layoutProps}>
   <Header />
   <BackButton />
-  <main
-    id="main-content"
-    class:list={[
-      "mx-auto w-full max-w-3xl px-4 pb-12",
-      { "mt-8": !SITE.showBackButton },
-    ]}
-    data-pagefind-body
-  >
-    <h1
-      transition:name={slugifyStr(title)}
-      class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+  <div class="mx-auto flex w-full max-w-[1960px] justify-center gap-8 px-4">
+    <main
+      id="main-content"
+      class:list={[
+        "w-full max-w-3xl pb-12",
+        { "mt-8": !SITE.showBackButton },
+      ]}
+      data-pagefind-body
     >
-      {title}
-    </h1>
-    <div class="flex items-center gap-4">
-      <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" class="my-2" />
-      <EditPost class="max-sm:hidden" {hideEditPost} {post} />
-    </div>
-    <article id="article" class="mx-auto prose mt-8 max-w-3xl">
-      <Content />
-    </article>
-
-    <hr class="my-8 border-dashed" />
-
-    <EditPost class="sm:hidden" {hideEditPost} {post} />
-
-    <ul class="mt-4 mb-8 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
-    </ul>
-
-    <div
-      class="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-end sm:gap-4"
-    >
-      <ShareLinks />
-
-      <button
-        id="back-to-top"
-        class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
+      <h1
+        transition:name={slugifyStr(title)}
+        class="inline-block text-2xl font-bold text-accent sm:text-3xl"
       >
-        <IconChevronLeft class="inline-block rotate-90" />
-        <span>Back to Top</span>
-      </button>
-    </div>
+        {title}
+      </h1>
+      <div class="flex items-center gap-4">
+        <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" class="my-2" />
+        <EditPost class="max-sm:hidden" {hideEditPost} {post} />
+      </div>
+      <article id="article" class="mx-auto prose mt-8 max-w-3xl">
+        <Content />
+      </article>
 
-    <hr class="my-6 border-dashed" />
+      <hr class="my-8 border-dashed" />
 
-    <Comments />
+      <EditPost class="sm:hidden" {hideEditPost} {post} />
 
-    <!-- Previous/Next Post Buttons -->
-    <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-      {
-        prevPost && (
-          <a
-            href={`/posts/${prevPost.slug}`}
-            class="flex w-full gap-1 hover:opacity-75"
-          >
-            <IconChevronLeft class="inline-block flex-none" />
-            <div>
-              <span>Previous Post</span>
-              <div class="text-sm text-accent/85">{prevPost.title}</div>
-            </div>
-          </a>
-        )
-      }
-      {
-        nextPost && (
-          <a
-            href={`/posts/${nextPost.slug}`}
-            class="flex w-full justify-end gap-1 text-right hover:opacity-75 sm:col-start-2"
-          >
-            <div>
-              <span>Next Post</span>
-              <div class="text-sm text-accent/85">{nextPost.title}</div>
-            </div>
-            <IconChevronRight class="inline-block flex-none" />
-          </a>
-        )
-      }
-    </div>
-  </main>
+      <ul class="mt-4 mb-8 sm:my-8">
+        {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+      </ul>
+
+      <div
+        class="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-end sm:gap-4"
+      >
+        <ShareLinks />
+
+        <button
+          id="back-to-top"
+          class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
+        >
+          <IconChevronLeft class="inline-block rotate-90" />
+          <span>Back to Top</span>
+        </button>
+      </div>
+
+      <hr class="my-6 border-dashed" />
+
+      <Comments />
+
+      <!-- Previous/Next Post Buttons -->
+      <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        {
+          prevPost && (
+            <a
+              href={`/posts/${prevPost.slug}`}
+              class="flex w-full gap-1 hover:opacity-75"
+            >
+              <IconChevronLeft class="inline-block flex-none" />
+              <div>
+                <span>Previous Post</span>
+                <div class="text-sm text-accent/85">{prevPost.title}</div>
+              </div>
+            </a>
+          )
+        }
+        {
+          nextPost && (
+            <a
+              href={`/posts/${nextPost.slug}`}
+              class="flex w-full justify-end gap-1 text-right hover:opacity-75 sm:col-start-2"
+            >
+              <div>
+                <span>Next Post</span>
+                <div class="text-sm text-accent/85">{nextPost.title}</div>
+              </div>
+              <IconChevronRight class="inline-block flex-none" />
+            </a>
+          )
+        }
+      </div>
+    </main>
+    <TOC headings={headings} />
+  </div>
   <Footer />
 </Layout>
 
