@@ -1,22 +1,25 @@
 ---
-import type { MarkdownHeading } from "astro";
-import { generateToc } from "@/utils/generateToc";
-import TOCHeading from "./TocHeading.astro";
-
-interface Props {
-  headings: MarkdownHeading[];
-}
-
-const { headings } = Astro.props;
-const toc = generateToc(headings);
----
-
-<aside class="lg:block fixed left-[82%] top-32 order-2 -me-32 hidden basis-64">
-  <h2 class="font-semibold">Table of Contents</h2>
-  <ul class="mt-4 text-sm">
-    {toc.map(heading => <TOCHeading heading={heading} />)}
-  </ul>
-</aside>
+  import type { MarkdownHeading } from "astro";
+  
+  import { generateToc } from "@/utils/generateToc";
+  
+  import TOCHeading from "./TocHeading.astro";
+  
+  interface Props {
+    headings: MarkdownHeading[];
+  }
+  
+  const { headings } = Astro.props;
+  
+  const toc = generateToc(headings);
+  ---
+  
+  <aside class="lg:block fixed left-[82%] top-32 order-2 -me-32 hidden basis-64 max-h-[calc(100vh-12rem)] overflow-auto hover-scrollbar">
+    <h2 class="font-semibold">目录</h2>
+    <ul class="mt-4 text-sm">
+      {toc.map(heading => <TOCHeading heading={heading} />)}
+    </ul>
+  </aside>
 
 <script is:inline>
   // 平滑滚动
@@ -32,3 +35,28 @@ const toc = generateToc(headings);
     });
   });
 </script>
+
+<style>
+  .hover-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hover-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hover-scrollbar:hover {
+    scrollbar-width: thin;
+    -ms-overflow-style: auto;
+  }
+  .hover-scrollbar:hover::-webkit-scrollbar {
+    display: block;
+    width: 2px;
+  }
+  .hover-scrollbar:hover::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .hover-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: var(--color-text-muted);
+    border-radius: 1px;
+  }
+</style>
