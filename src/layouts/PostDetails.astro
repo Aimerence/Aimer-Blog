@@ -166,7 +166,7 @@ const nextPost =
         }
       </div>
     </main>
-    <TOC headings={headings} />
+    {headings.length > 0 && <TOC headings={headings} />}
   </div>
   <Footer />
 </Layout>

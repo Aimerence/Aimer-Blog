@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://www.521942.xyz/", // replace this with your deployed domain
   author: "Aimer",
   profile: "https://github.com/Aimerence/",
-  desc: "A simple blog .",
+  desc: "A simple blog.",
   title: "Aimer",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
@@ -14,7 +14,7 @@ export const SITE = {
   editPost: {
     enabled: true,
     text: "Suggest Changes",
-    url: "https://github.com/Aimerence/aimer-blog/edit/main",
+    url: "https://github.com/Aimerence/aimer-blog/edit/main/",
   },
   dynamicOgImage: true,
   lang: "zh-CN", // html lang code. Set this empty and default will be "en"
