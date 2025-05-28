@@ -1,40 +1,25 @@
 ---
-  import type { MarkdownHeading } from "astro";
-  
-  import { generateToc } from "@/utils/generateToc";
-  
-  import TOCHeading from "./TocHeading.astro";
-  
-  interface Props {
-    headings: MarkdownHeading[];
-  }
-  
-  const { headings } = Astro.props;
-  
-  const toc = generateToc(headings);
-  ---
-  
-  <aside class="lg:block fixed left-[82%] top-32 order-2 -me-32 hidden basis-64 max-h-[calc(100vh-12rem)] overflow-auto hover-scrollbar">
-    <h2 class="font-semibold">目录</h2>
-    <ul class="mt-4 text-sm">
-      {toc.map(heading => <TOCHeading heading={heading} />)}
-    </ul>
-  </aside>
+import type { MarkdownHeading } from "astro";
 
-<script is:inline>
-  // 平滑滚动
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href")?.slice(1);
-      const target = document.getElementById(targetId);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
-        history.pushState(null, "", `#${targetId}`);
-      }
-    });
-  });
-</script>
+import { generateToc } from "@/utils/generateToc";
+
+import TOCHeading from "./TocHeading.astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+const toc = generateToc(headings);
+---
+
+<aside class="lg:block fixed left-[82%] top-32 order-2 -me-32 hidden basis-64 max-h-[calc(100vh-12rem)] overflow-auto hover-scrollbar">
+  <h2 class="font-semibold">目录</h2>
+  <ul class="mt-4 text-sm">
+    {toc.map(heading => <TOCHeading heading={heading} />)}
+  </ul>
+</aside>
 
 <style>
   .hover-scrollbar {
