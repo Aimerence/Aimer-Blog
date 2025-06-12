@@ -9,6 +9,7 @@ import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
 import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
+import Comments from "@/components/Comments.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
@@ -89,7 +90,7 @@ const nextPost =
     <main
       id="main-content"
       class:list={[
-        "w-full max-w-3xl pb-12",
+        "w-full max-w-app pb-12",
         { "mt-8": !SITE.showBackButton },
       ]}
       data-pagefind-body
@@ -104,7 +105,7 @@ const nextPost =
         <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" class="my-2" />
         <EditPost class="max-sm:hidden" {hideEditPost} {post} />
       </div>
-      <article id="article" class="mx-auto prose mt-8 max-w-3xl">
+      <article id="article" class="mx-auto prose mt-8 max-w-app">
         <Content />
       </article>
 
@@ -116,19 +117,9 @@ const nextPost =
         {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
       </ul>
 
-      <div
-        class="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-end sm:gap-4"
-      >
-        <ShareLinks />
+      <BackToTopButton />
 
-        <button
-          id="back-to-top"
-          class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
-        >
-          <IconChevronLeft class="inline-block rotate-90" />
-          <span>Back to Top</span>
-        </button>
-      </div>
+      <ShareLinks />
 
       <hr class="my-6 border-dashed" />
 
