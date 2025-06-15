@@ -11,7 +11,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Refactor
 
 - update tailwind typography css overrides (#538)
-Add comment
 
 ## v5.4.0 (2025-06-14)
 
