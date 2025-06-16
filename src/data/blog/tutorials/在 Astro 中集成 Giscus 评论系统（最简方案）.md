@@ -3,7 +3,7 @@ title: 在 Astro 中集成 Giscus 评论系统（最简方案）
 author: Aimerence
 pubDatetime: 2025-03-23T13:20:00+08:00
 modDatetime: 2025-03-23T21:19:59+08:00
-featured: false
+featured: true
 draft: false
 tags:
   - astro
