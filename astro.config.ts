@@ -27,7 +27,7 @@ export default defineConfig({
       defaultColor: false,
       wrap: false,
       transformers: [
-        transformerFileName(),
+        transformerFileName({ style: "v2", hideDot: false }),
         transformerNotationHighlight(),
         transformerNotationWordHighlight(),
         transformerNotationDiff({ matchAlgorithm: "v3" }),
@@ -35,15 +35,18 @@ export default defineConfig({
     },
   },
   vite: {
+    // eslint-disable-next-line
+    // @ts-ignore
+    // This will be fixed in Astro 6 with Vite 7 support
+    // See: https://github.com/withastro/astro/issues/14030
     plugins: [tailwindcss()],
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
   },
   image: {
-    // Used for all Markdown images; not configurable per-image
-    // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
-    experimentalLayout: "constrained",
+    responsiveStyles: true,
+    layout: "constrained",
   },
   env: {
     schema: {
@@ -55,7 +58,6 @@ export default defineConfig({
     },
   },
   experimental: {
-    responsiveImages: true,
     preserveScriptOrder: true,
   },
 });
