@@ -13,7 +13,7 @@ title: "About"
 1. 本站用的astro框架加astro-paper主题。
 2. 本站托管在免费的Vercel上，域名解析在Cloudflare。
 3. 本站图床白嫖Backblaze b2 + Cloudflare cdn。
-4. 关于网站一些建设（ctrl c\crtl v大法无敌）
+4. 关于网站一些建设（ctrl c\ctrl v大法无敌）
 
 ## 关于内容
 
