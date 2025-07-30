@@ -3,8 +3,9 @@ title: 在 Astro 中集成 Giscus 评论系统（最简方案）
 author: Aimerence
 pubDatetime: 2025-03-23T13:20:00+08:00
 modDatetime: 2025-03-23T21:19:59+08:00
-featured: true
+featured: false
 draft: false
+slug: integrate-giscus-in-astro
 tags:
   - astro
   - blog
@@ -116,6 +117,7 @@ description: 使用原生 JavaScript 方式在 Astro 博客中集成 Giscus 评�
 ```
 
 主要配置说明：
+
 - `data-mapping="pathname"`: 使用页面路径映射评论
 - `data-reactions-enabled="1"`: 启用表情反应
 - `data-input-position="top"`: 评论框在顶部
@@ -197,4 +199,4 @@ import Comments from "@/components/Comments.astro";
    - `data-category` 和 `data-category-id`：Giscus 讨论分类
    - `data-mapping`：使用 pathname 进行页面映射
    - `data-theme`：评论区主题样式
-   - `data-lang`：界面语言设置 
+   - `data-lang`：界面语言设置  

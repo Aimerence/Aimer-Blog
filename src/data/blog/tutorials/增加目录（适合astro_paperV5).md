@@ -1,9 +1,10 @@
 ---
 title: 给 AstroPaper v5 添加文章目录(TOC)功能
+slug: add-table-of-contents
 author: Aimerence
 pubDatetime: 2025-03-23T14:30:00+08:00
 modDatetime: 2025-03-23T22:29:01+08:00
-featured: true
+featured: false
 draft: false
 tags:
   - astro

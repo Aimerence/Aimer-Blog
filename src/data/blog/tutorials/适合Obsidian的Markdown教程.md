@@ -3,7 +3,7 @@ author: Aimer
 pubDatetime: 2024-11-13T15:22:00Z
 modDatetime: 2024-12-21T09:12:47.400Z
 title: 适合Obsidian的Markdown教程
-# slug: 适合Obsidian的Markdown教程
+slug: obsidian-markdown-guide
 featured: false
 draft: false
 tags:

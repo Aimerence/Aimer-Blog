@@ -3,7 +3,7 @@ author: Aimer
 pubDatetime: 2024-03-21T07:22:00Z
 title: 项目结构分析：基于 Astro 的现代博客系统
 slug: astro-blog-system-analysis
-featured: true
+featured: false
 draft: false
 tags:
   - astro
