@@ -2,6 +2,7 @@
 title: Tailwind Typography Plugin
 author: Sat Naing
 pubDatetime: 2022-07-05T02:05:51Z
+modDatetime: 2025-07-30T13:48:54+08:00
 featured: false
 draft: false
 tags:

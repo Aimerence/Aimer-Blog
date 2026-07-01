@@ -1,37 +1,27 @@
----
+﻿---
 title: "About"
-description: "A bit about me and this blog."
+description: "关于我"
 ---
 
-AstroPaper is a minimal, accessible and SEO-friendly blog theme built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+## 关于域名
 
-![Astro Paper](@/assets/images/astropaper-og.jpg)
+1. 六位数字xyz域名十年只要48软妹币。
+2. 域名由52+1942组成，1942因为《1984》和《1Q84》两本书特别喜爱的缘故，两个极端的世界，故取半致敬。注册完域名发现谐音"我爱你就是啊"，蛮中意捏！
 
-AstroPaper provides a solid foundation for blogs, or even portfolios\_ with full markdown support, built-in dark mode, and a clean layout that works out-of-the-box.
+## 关于架构
 
-The blog posts in this theme also serve as guides, docs or example articles\_ making AstroPaper a flexible starting point for your next content-driven site.
+1. 本站用的astro框架加astro-paper主题。
+2. 本站托管在免费的Vercel上，域名解析在Cloudflare。
+3. 本站图床白嫖Backblaze b2 + Cloudflare cdn。
+4. 关于网站一些建设（ctrl c\ctrl v大法无敌）
 
-## Features
+## 关于内容
 
-AstroPaper comes with a set of useful features that make content publishing easy and effective:
+1. 写些学习笔记，证明曾经学过。
+2. 发些无病呻吟，假装文学少年。
 
-- SEO-friendly
-- Fast performance
-- Light & dark mode
-- Highly customizable
-- Organizable blog posts
-- Responsive & accessible
-- Static search with [PageFind](https://pagefind.app/)
-- Automatic social image generation
+## 关于本人
 
-and so much more.
-
-## Show your support
-
-If you like [AstroPaper](https://github.com/satnaing/astro-paper), consider giving it a star ⭐️.
-
-Found a bug 🐛 or have an improvement ✨ in mind? Feel free to open an [issue](https://github.com/satnaing/astro-paper/issues), submit a [pull request](https://github.com/satnaing/astro-paper/pulls) or start a [discussion](https://github.com/satnaing/astro-paper/discussions).
-
-If you find this theme helpful, you can also [sponsor me on GitHub](https://github.com/sponsors/satnaing) or [buy me a coffee](https://buymeacoffee.com/satnaing) to show your support — every penny counts.
-
-Kyay zuu! 🙏🏼
+1. 稀有的绿老头（INFJ），其实不稀有，实际亚洲挺多。
+2. 有做事目的但执行力低，建博客也是为了提高执行力。
+3. 多愁善感、外热内冷，当然也可能是表面。

@@ -1,0 +1,159 @@
+<span
+  id="toc-aside"
+  class="hover-scrollbar fixed top-24 right-4 z-20 mt-4 hidden max-h-[calc(100vh-10rem)] w-60 overflow-y-auto lg:block"
+>
+  <ul id="toc-list" class="space-y-1"></ul>
+</span>
+
+<style>
+  .hover-scrollbar::-webkit-scrollbar {
+    width: 3px;
+    background: transparent;
+  }
+  .hover-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    transition: background-color 0.2s;
+  }
+  .hover-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: var(--color-text-muted);
+    border-radius: 1px;
+  }
+</style>
+
+<script>
+  // 基于原项目AstroPaper v5.5.1的TOC逻辑，增强版本
+  function initTOC() {
+    try {
+      const tocAside = document.getElementById("toc-aside");
+      const tocList = document.getElementById("toc-list");
+
+      if (!tocAside || !tocList) {
+        return;
+      }
+
+      // 使用article的选择器，确保能找到文章内的标题
+      const article = document.getElementById("article");
+      if (!article) {
+        tocAside.style.display = "none";
+        return;
+      }
+
+      // 获取所有h2-h4标题（尝试两种选择器）
+      const headings = Array.from(article.querySelectorAll("h2, h3, h4"));
+
+      if (headings.length === 0) {
+        // 如果上面没找到，尝试更通用的选择器
+        const altHeadings = Array.from(
+          document.querySelectorAll("article h2, article h3, article h4")
+        );
+        if (altHeadings.length === 0) {
+          tocAside.style.display = "none";
+          return;
+        }
+        headings.push(...altHeadings);
+      }
+
+      // 清除初始内容
+      tocList.innerHTML = "";
+
+      // 过滤标题（只需要h2-h4）
+      const filteredHeadings = headings.filter(heading => {
+        const depth = parseInt(heading.tagName.substring(1));
+        return depth >= 2 && depth <= 4;
+      });
+
+      if (filteredHeadings.length === 0) {
+        tocAside.style.display = "none";
+        return;
+      }
+
+      // 生成TOC条目
+      filteredHeadings.forEach((heading, index) => {
+        const depth = parseInt(heading.tagName.substring(1));
+        const text = heading.textContent || `标题 ${index + 1}`;
+        const id = heading.id || `heading-${index}`;
+
+        // 如果没有id，创建一个
+        if (!heading.id) {
+          heading.id = id;
+        }
+
+        const li = document.createElement("li");
+        li.className = depth > 2 ? "ms-2" : "";
+
+        const a = document.createElement("a");
+        a.href = "#" + heading.id;
+        a.className = `block line-clamp-2 hover:text-accent text-nowrap max-w-[14rem] overflow-hidden overflow-ellipsis ${depth <= 2 ? "mt-3" : "mt-2 text-[0.80rem]"}`;
+        a.textContent = text;
+
+        a.addEventListener("click", e => {
+          e.preventDefault();
+          heading.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+
+          // 更新URL hash
+          history.pushState({}, "", "#" + heading.id);
+        });
+
+        li.appendChild(a);
+        tocList.appendChild(li);
+      });
+
+      // 监听滚动以高亮当前标题
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // 移除所有高亮
+              document.querySelectorAll("#toc-list a").forEach(a => {
+                a.classList.remove("text-accent", "font-medium");
+                a.classList.add("text-foreground");
+              });
+
+              // 高亮当前
+              const currentLink = document.querySelector(
+                `#toc-list a[href="#${entry.target.id}"]`
+              );
+              if (currentLink) {
+                currentLink.classList.add("text-accent", "font-medium");
+                currentLink.classList.remove("text-foreground");
+              }
+            }
+          });
+        },
+        {
+          rootMargin: "-25% 0px -70% 0px",
+          threshold: 0,
+        }
+      );
+
+      filteredHeadings.forEach(heading => {
+        observer.observe(heading);
+      });
+
+      // 显示TOC
+      tocAside.classList.remove("hidden");
+      tocAside.classList.add("lg:block");
+    } catch (error) {
+      // TOC初始化失败，静默处理
+    }
+  }
+
+  // 多种初始化方式
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initTOC);
+  } else {
+    // 如果DOM已经加载完成，直接初始化
+    initTOC();
+  }
+
+  // 延迟初始化，确保内容已完全渲染
+  setTimeout(initTOC, 500);
+
+  // 监听Astro页面切换
+  document.addEventListener("astro:after-swap", () => {
+    setTimeout(initTOC, 100);
+  });
+</script>

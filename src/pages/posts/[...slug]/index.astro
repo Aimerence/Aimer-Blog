@@ -5,6 +5,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
 import Tag from "@/components/Tag.astro";
+import TOC from "@/components/Toc.astro";
 import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { slugifyStr } from "@/utils/slugify";
@@ -132,32 +133,54 @@ const ogImage = ogImageUrl
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
     </div>
 
-    <article
-      id="article"
-      class:list={[
-        "mt-8 w-full",
-        "app-prose max-w-app",
-        "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
-      ]}
-    >
-      <Content />
-    </article>
+    {/* TOC布局容器: 使用flex布局将文章内容和TOC并排放置 */}
+    <div class="mx-auto flex w-full max-w-[1960px] justify-center gap-8 px-4">
+      {/* 主内容区域: max-w-app控制文章宽度，让TOC有空间显示 */}
+      <article
+        id="article"
+        class:list={[
+          "max-w-app mt-8 w-full pb-12",
+          "app-prose",
+          "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
+        ]}
+      >
+        <Content />
+      </article>
 
-    <hr class="my-8 border-dashed" />
+      {/* TOC组件: 只在有标题时显示，固定在文章右侧 */}
+      <!-- 使用JavaScript版本的TOC，不需要headings参数 -->
+      <TOC />
+    </div>
 
-    <EditPost class="sm:hidden" {hideEditPost} {post} />
+    {/* 在文章内容后添加其他元素 */}
+    <div class="mx-auto flex w-full max-w-[1960px] justify-center gap-8 px-4">
+      <div class="max-w-app w-full">
+        <hr class="my-8 border-dashed" />
 
-    <BackToTopButton />
+        <EditPost class="sm:hidden" {hideEditPost} {post} />
 
-    <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
-    </ul>
+        <BackToTopButton />
 
-    <ShareLinks />
+        <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
+          {
+            tags.map(tag => (
+              <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />
+            ))
+          }
+        </ul>
 
-    <hr class="my-8 border-dashed" />
+        <ShareLinks />
 
-    <AdjacentPostNav {prevPost} {nextPost} />
+        {/* 评论系统 - 先暂时注释掉，如果有迁移的Comments组件再开启 */}
+        {/* {config.features.comments && <Comments />} */}
+
+        <hr class="my-8 border-dashed" />
+
+        <AdjacentPostNav {prevPost} {nextPost} />
+      </div>
+      {/* TOC对应的空白区域 - 这里只保留结构对齐 */}
+      <div class="hidden w-[264px] lg:block"></div>
+    </div>
   </main>
   <Footer />
 </PostLayout>
