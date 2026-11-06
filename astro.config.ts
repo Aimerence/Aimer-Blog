@@ -66,7 +66,9 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  fonts: [
+  // 字体配置 - 由于Google Fonts在国内无法访问，暂时注释掉
+  // 如需要可取消注释或使用本地字体
+  /* fonts: [
     {
       name: "Google Sans Code",
       cssVariable: "--font-google-sans-code",
@@ -76,7 +78,7 @@ export default defineConfig({
       styles: ["normal", "italic"],
       formats: ["woff", "ttf"],
     },
-  ],
+  ], */
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
