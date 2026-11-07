@@ -1,6 +1,6 @@
 ﻿---
 title: "About"
-description: "关于我"
+description: "关于我的介绍"
 ---
 
 ## 关于域名
