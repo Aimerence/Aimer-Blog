@@ -5,6 +5,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
 import Tag from "@/components/Tag.astro";
+import Comments from "@/components/Comments.astro";
 import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { slugifyStr } from "@/utils/slugify";
@@ -167,12 +168,16 @@ const ogImage = ogImageUrl
         <EditPost class="flex-none sm:hidden" {hideEditPost} {post} />
       </div>
 
-      <ShareLinks />
-    </div>
+<ShareLinks />
+      </div>
 
-    <hr class="my-8 border-dashed" />
+      <hr class="my-8 border-dashed" />
 
-    <AdjacentPostNav {prevPost} {nextPost} />
+      {config.features.comments && <Comments />}
+
+      <hr class="my-8 border-dashed" />
+
+      <AdjacentPostNav {prevPost} {nextPost} />
   </main>
   <Footer />
 </PostLayout>

@@ -66,6 +66,8 @@ interface FeaturesConfig {
    * for one post with `hideToc: true` in its frontmatter.
    */
   toc?: boolean;
+  /** Enable Giscus comments on post detail pages. Defaults to false. */
+  comments?: boolean;
 }
 
 interface SocialLink {

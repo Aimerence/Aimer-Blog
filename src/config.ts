@@ -34,6 +34,7 @@ const config: ResolvedAstroPaperConfig = {
     editPost: userConfig.features?.editPost ?? { enabled: false },
     search: userConfig.features?.search ?? "pagefind",
     toc: userConfig.features?.toc ?? true,
+    comments: userConfig.features?.comments ?? false,
   },
   socials: userConfig.socials ?? [],
   shareLinks: userConfig.shareLinks ?? [],

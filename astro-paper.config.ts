@@ -27,6 +27,7 @@ export default defineAstroPaperConfig({
     },
     search: "pagefind",
     toc: true,
+    comments: true,  // 启用Giscus评论系统
   },
   socials: [
     { name: "github",   url: "https://github.com/Aimerence/Aimer-Blog" },
