@@ -15,11 +15,10 @@ export default defineAstroPaperConfig({
   posts: {
     perPage: 4,
     perIndex: 4,
-    scheduledPostMargin: 15 * 60 * 1000,
   },
   features: {
     lightAndDarkMode: true,
-    dynamicOgImage: true,
+    dynamicOgImage: false,  // 暂时禁用以解决satori依赖问题
     showArchives: true,
     showBackButton: true,
     editPost: {
@@ -27,6 +26,7 @@ export default defineAstroPaperConfig({
       url: "https://github.com/Aimerence/aimer-blog/edit/main/",
     },
     search: "pagefind",
+    toc: true,
   },
   socials: [
     { name: "github",   url: "https://github.com/Aimerence/Aimer-Blog" },

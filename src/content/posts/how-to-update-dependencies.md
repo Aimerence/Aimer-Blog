@@ -2,6 +2,7 @@
 title: How to update dependencies of AstroPaper
 author: Sat Naing
 pubDatetime: 2023-07-20T15:33:05.569Z
+modDatetime: 2026-11-01T10:00:00.000Z
 slug: how-to-update-dependencies
 featured: false
 draft: false
@@ -14,8 +15,6 @@ description: How to update project dependencies and AstroPaper template.
 Updating the dependencies of a project can be tedious. However, neglecting to update project dependencies is not a good idea either 😬. In this post, I will share how I usually update my projects, focusing on AstroPaper as an example. Nonetheless, these steps can be applied to other js/node projects as well.
 
 ![Forrest Gump Fake Quote](@/assets/images/forrest-gump-quote.png)
-
-## Table of contents
 
 ## Updating Package Dependencies
 
@@ -61,7 +60,7 @@ The thing is, you might already have updated the template according to your flav
 
 ### Files and Directories to keep in mind
 
-In most cases, the files and directories you might not want to override (as you've likely updated those files) are `src/content/blog/`, `src/config.ts`, `src/pages/about.md`, and other assets & styles like `public/` and `src/styles/base.css`.
+In most cases, the files and directories you might not want to override (as you've likely updated those files) are `astro-paper.config.ts`, `src/content/posts/`, `src/content/pages/about.md`, `src/styles/theme.css`, and your own assets in `public/` and `src/assets/`.
 
 If you’re someone who only updates the bare minimum of the template, it should be okay to replace everything with the latest AstroPaper except the above files and directories. It’s like pure Android OS and other vendor-specific OSes like OneUI. The less you modify the base, the less you have to update.
 
