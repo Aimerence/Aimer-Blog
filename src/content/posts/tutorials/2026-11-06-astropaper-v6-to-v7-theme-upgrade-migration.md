@@ -2,7 +2,7 @@
 title: "从 AstroPaper v6 升级到 v7：完整迁移记录与经验分享"
 author: "Aimer"
 pubDatetime: 2026-11-06T00:00:00Z
-modDatetime: 2026-11-07T00:00:00Z
+modDatetime: 2026-11-16T00:00:00Z
 slug: astropaper-v6-to-v7-theme-upgrade-migration
 featured: false
 draft: false
@@ -12,7 +12,7 @@ tags:
   - 博客
   - 教程
   - 升级案例
-description: "记录我的个人博客从 AstroPaper v6 升级到 v7 的完整过程（2026年11月6-7日），包括遇到的问题、解决方案、合并策略以及最终构建效果分析。"
+description: "记录我的个人博客从 AstroPaper v6 升级到 v7 的完整过程（2026年11月6-7日），以及 11 月 16 日同步上游 v7.2.0 自定义插槽机制的实操记录，包括遇到的问题、解决方案、合并策略以及最终构建效果分析。"
 heroImage: "/default-og.jpg"
 lang: "zh"
 ---
@@ -81,8 +81,6 @@ commit be81ab0 - chore: merge upgrade to AstroPaper v7 from my-upgrade branch
 commit 0d080b4 - fix: disable dynamic OG image endpoints by renaming .ts files to .disabled  
 commit 17692e9 - docs: add v6 to v7 upgrade migration record article
 ```
-
-### 1. 配置文件迁移
 
 ### 1. 配置文件迁移
 
@@ -262,6 +260,65 @@ PageFind 搜索集成更紧密，索引效率更高。
    - 规避方案：使用系统字体，提升性能
    - 优先级：低，有性能优势
 
+## 2026-11-16 同步上游 v7.2.0：自定义插槽机制
+
+v7 合并九天后，上游作者发布了 **v7.2.0**（2026-11-15）。这次我做了一次完整的"先对比、后合并"实操，过程记录如下。
+
+### 更新内容确认
+
+通过 GitHub 的 compare 页面和 API 对比 `v7.1.0...v7.2.0`，确认实际代码改动只有：
+
+| 变更 | 内容 |
+|---|---|
+| ✨ 新功能 | 新增 `src/custom/` 目录，提供 3 个自定义插槽组件 |
+| 📦 依赖 | astro 7.4.8+、@astrojs/mdx 8、tailwindcss 4.3.5、fast-xml-parser 安全补丁 |
+| 📄 文档 | CHANGELOG、LaTeX 教程（KaTeX CSS 导入位置改到 `Head.astro`） |
+
+**核心新功能——自定义插槽**：作者在主题里预留了三个"空插座"，主题负责在正确的位置渲染它们，内容完全由用户填充：
+
+| 组件 | 渲染位置 | 典型用途 |
+|---|---|---|
+| `src/custom/Head.astro` | 每页 `<head>` 末尾 | 统计脚本、站点验证 meta、额外样式 |
+| `src/custom/BodyEnd.astro` | 每页 `</body>` 前 | 脚本、挂件 |
+| `src/custom/PostEnd.astro` | 文章页分享链接之后 | 评论、订阅表单（会传入 `post` 对象，可按文章跳过） |
+
+### 合并过程
+
+```bash
+# 1. 代码合并（共 5 行 + 3 个新文件）
+#    - 新建 src/custom/Head.astro / BodyEnd.astro / PostEnd.astro（空实现）
+#    - Layout.astro：+2 行 import，<CustomHead /> 放 </head> 前，
+#      <CustomBodyEnd /> 放 </body> 前
+#    - 文章页：+1 行 import，<PostEnd post={post} /> 放 <ShareLinks /> 之后
+
+# 2. 依赖升级
+pnpm update   # astro 7.4.12 / mdx 8.1.6 / tailwindcss 4.3.5
+```
+
+### 遇到的坑：Windows 文件锁
+
+第一次 `pnpm update` 在最后的链接阶段报错：
+
+```
+ERR_PNPM_SYMLINK_FAILED [safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED]
+```
+
+原因是 **dev server 还在运行**，占用了 `node_modules` 里的旧文件（Windows 特有的文件锁问题）。停掉 dev server 重新 `pnpm update` 即可解决。这个坑在《如何更新 Astro Paper 主题并处理冲突》里也补充记录了。
+
+### 构建验证
+
+- `astro check`：67 个文件，0 错误 0 警告（1 个提示：`PostEnd.astro` 的 `post` 变量未使用——正常，插槽本来就是空实现）
+- 生产构建：30 个页面全部成功，sitemap 正常
+- Pagefind：索引 7 页 / 4103 词
+
+### 为什么这次合并是零冲突？
+
+这是本次最大的收获：**上游更新的文件（`Layout.astro`、文章页、依赖文件）和我的修改文件（`src/custom/`、首页）完全没有交集**，Git 的文件级冲突机制根本没机会触发。
+
+`src/custom/` 是作者专门划出的"用户所有"目录，并承诺永不修改、移动、重命名这些文件。以前我直接改 `Layout.astro` 加统计脚本，每次上游更新都要手动合并；现在这类代码搬进 `Head.astro` 插槽，以后升级主题就是纯粹的"接受上游 + 检查一遍"。
+
+> 我的 `index.astro`（首页问候语、中文名言）也不在上游修改范围内，同样零冲突。原则很简单：**能不碰主题文件就不碰**。
+
 ## 致谢
 
 - **Sat Naing** - AstroPaper 主题作者，提供了优秀的主题和清晰的升级指导
@@ -272,6 +329,6 @@ PageFind 搜索集成更紧密，索引效率更高。
 ---
 
 *首次创建: 2026-11-06*
-*最终更新: 2026-11-07*
+*最终更新: 2026-11-16（补充 v7.2.0 自定义插槽同步记录）*
 *升级完成状态: ✅ 生产就绪已合并到 main 分支*
 *后续操作: 可推送 main 分支触发生产部署*

@@ -1,0 +1,21 @@
+---
+import { type CollectionEntry } from "astro:content";
+
+/**
+ * Custom Post End Component for custom content at the end of a post
+ *
+ * This component is rendered at the end of each post, right after the
+ * share links. The `post` prop is available, so you can optionally skip
+ * rendering for certain posts.
+ *
+ * e.g.
+ * {post.id !== "some-post" && <NewsletterForm />}
+ */
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
+const { post } = Astro.props;
+---
+
+<></>
