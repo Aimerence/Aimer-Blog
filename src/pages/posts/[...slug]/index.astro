@@ -170,10 +170,13 @@ const ogImage = ogImageUrl
       </div>
 
 <ShareLinks />
-      <PostEnd post={post} />
       </div>
 
       <hr class="my-8 border-dashed" />
+
+      <div data-pagefind-ignore>
+        <PostEnd {post} />
+      </div>
 
       {config.features.comments && <Comments />}
 
