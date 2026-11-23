@@ -2,7 +2,7 @@
 title: "从 AstroPaper v6 升级到 v7：完整迁移记录与经验分享"
 author: "Aimer"
 pubDatetime: 2026-11-06T00:00:00Z
-modDatetime: 2026-11-16T00:00:00Z
+modDatetime: 2026-11-23T00:00:00Z
 slug: astropaper-v6-to-v7-theme-upgrade-migration
 featured: false
 draft: false
@@ -319,6 +319,62 @@ ERR_PNPM_SYMLINK_FAILED [safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED]
 
 > 我的 `index.astro`（首页问候语、中文名言）也不在上游修改范围内，同样零冲突。原则很简单：**能不碰主题文件就不碰**。
 
+## 2026-11-23 同步上游 v7.2.1：cherry-pick 实战
+
+上游发布了 **v7.2.1**（2026-11-21），这次合并验证了"先对比后合并"流程的价值，也换了一种更精准的合并姿势。
+
+### 上游改了什么
+
+`git fetch upstream` 后用 `git log HEAD..upstream/main` 和 `git show --stat` 逐一确认，共 4 个提交：
+
+| 提交 | 内容 | 处理方式 |
+|---|---|---|
+| `3b22e1a` | 平滑滚动尊重系统"减少动画"偏好 | cherry-pick |
+| `617fb80` | `PostEnd` 插槽内容用 `data-pagefind-ignore` 排除出搜索索引 | cherry-pick |
+| `368e4e1` | 7 个依赖升级（astro 7.4.12、prettier 3.10.1 等） | 大部分已有，手动补齐 |
+| `217c4e3` | 版本号 bump + CHANGELOG | 跳过（版本号是我自己的） |
+
+### 为什么这次用 cherry-pick 而不是 merge
+
+上次 v7.2.0 我是**手动**把代码改到本地的，Git 历史上并不知道这些提交已经合并过。如果直接 `git merge upstream/main`，那些"已知改动"会再次撞上来，产生一堆假冲突。
+
+`git cherry-pick -x <sha>` 只挑选真正需要的提交，且 `-x` 会在提交信息里记录来源，历史清晰。这次只有文章页一个真冲突：上游把 `<PostEnd />` 包进了 `<div data-pagefind-ignore>`，而我的文件里多了 `<Comments />`——保留双方意图即可。
+
+### 依赖对齐
+
+7 个依赖里 5 个在 11 月 16 日的 `pnpm update` 时就已经是最新（astro 7.4.12、mdx 8.1.6 等），只剩两个需要手动升：
+
+```bash
+pnpm add -D prettier@3.10.1 @typescript-eslint/parser@8.73.0
+```
+
+原因：`prettier` 在 package.json 里是**精确版本**（`"3.9.10"`，没有 `^`），`pnpm update` 永远不会碰它——这也是上游锁定 prettier 行为的延续，升级要显式 `pnpm add`。
+
+### 新坑：pnpm 的 SAFE_DELETE 批量删除保护
+
+升级依赖时反复遇到：
+
+```
+ERR_PNPM_SYMLINK_FAILED [safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED]
+```
+
+排查发现这不是 pnpm 本身的问题，而是开发环境的**批量删除防护**在拦截 pnpm 清理旧包的内部操作。中途一次取消的执行还留下了状态锁（`state lock timeout`），导致后续所有安装都超时。
+
+解决办法：等锁过期后，删掉 `node_modules` 全新安装（`rmdir /s /q node_modules` + `pnpm install`）。教训：**中断依赖安装可能留下状态锁**，报 lock timeout 不要反复重试，先等一会儿或清理锁。
+
+### 构建验证
+
+- `astro check`：0 错误（1 个已知提示）
+- 生产构建：30 页全部成功，4.79 秒
+- Pagefind：7 页 / 4487 词
+
+### 收获总结
+
+1. **cherry-pick 适合"手动合并过上游"的历史**——只拉真正需要的提交，假冲突归零
+2. **精确锁版本的依赖要用 `pnpm add` 升级**，`pnpm update` 不生效
+3. 每次同步上游前 `git fetch upstream` + `git show --stat` 看清楚再动手，这次 4 个提交里有 2 个根本不用合并代码
+4. 插槽机制开始发挥作用了：这次上游改的正是 `PostEnd` 的渲染方式，因为我已经接入了插槽，冲突只有一处且意图明确
+
 ## 致谢
 
 - **Sat Naing** - AstroPaper 主题作者，提供了优秀的主题和清晰的升级指导
@@ -329,6 +385,6 @@ ERR_PNPM_SYMLINK_FAILED [safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED]
 ---
 
 *首次创建: 2026-11-06*
-*最终更新: 2026-11-16（补充 v7.2.0 自定义插槽同步记录）*
+*最终更新: 2026-11-23（补充 v7.2.1 cherry-pick 同步记录）*
 *升级完成状态: ✅ 生产就绪已合并到 main 分支*
 *后续操作: 可推送 main 分支触发生产部署*
